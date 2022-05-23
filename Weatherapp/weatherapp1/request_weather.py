@@ -2,7 +2,7 @@ from unicodedata import name
 import requests
 
 def WeatherStatus(cities):
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=ea62b56a314b6aeeb26f5e1872e25a10'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid={YOUR_API_KEY}'
     all_data = []
 
     for city in cities:
