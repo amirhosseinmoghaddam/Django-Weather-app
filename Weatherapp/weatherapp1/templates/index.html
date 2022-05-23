@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+{% if messages %}
+   {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   {% endfor %}
+{% endif %}
+
+
+<main style="text-align: center;">
+    <div>
+        <form method="post" class="input-group">
+            {% csrf_token %}
+            <input type="text" name="location" class="form-control" maxlength="1000" required id="id_location" placeholder="Location Name">
+            <button type="submit" class="btn btn-primary" style="width: 80px;">Add</button>
+        </form>
+        <br>
+    </div>
+    <div>
+        <h5>Weather locations <span class="badge badge-secondary bg-dark">Status</span></h5>
+    </div>
+    <br>
+    {% for weather_data in weather_datas %}
+    <div>
+       <div class="card text-dark bg-light mb-3">
+            <div class="card-header" style="font-weight: bold;">{{ weather_data.name }}</div>
+            <div class="card-body">
+            <img src="https://openweathermap.org/img/w/{{ weather_data.icon }}.png" alt="{{ weather_data.name }} image">
+            <h2 class="card-title" style="color: #0055ff;">{{ weather_data.temp }}°C</h2>
+            <p class="card-text">{{ weather_data.desc }}</p>
+            <a href="{% url 'delete' weather_data.name %}" style="color: red; text-decoration: none;">Delete location</a>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+
+{% endblock %}
